@@ -20,5 +20,7 @@ void main(int argc, char** argv)
 	printf("\n%dh", trame->hour.hour);
 	printf("%dm", trame->hour.minute);
 	printf("%ds\n", trame->hour.second);
+	printf("\n%f %c", trame->latitude.coord, trame->latitude.direction);
+	printf("\n%f %c", trame->longitude.coord, trame->longitude.direction);
 }
 
