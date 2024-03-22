@@ -31,3 +31,59 @@ NMEA str_to_nmea(char* str)
     nmea.checksum = CAST_STR_TO_INT(nmea_properties[13]);
     return nmea;
 }
+
+char* nmea_get_heure(NMEA trame)
+{
+    char* str_heure = malloc(sizeof(char)* 10); 
+    str_heure[0] = int_to_str(trame.hour.hour);
+    str_heure[2] = 'h'
+    str_heure[3] = int_to_str(trame.hour.minute);
+    str_heure[5] = 'm'
+    str_heure[6] = int_to_str(trame.hour.second);
+    str_heure[8] = 's'
+    str_heure[9] = '\0'
+    return str_heure;
+}
+
+char* nmea_get_latitude(NMEA trame)
+{
+    char* str_latitude = malloc(sizeof(char)* (str_len(float_to_str(trame.latitude.coord)) + 2)); 
+    str_latitude[0] = float_to_str(trame.latitude.coord);
+    str_latitude[str_len(float_to_str(trame.latitude.coord))] = trame.latitude.direction;
+    str_latitude[str_len(float_to_str(trame.latitude.coord)) + 1] = '\0';
+    return str_latitude;
+}
+
+char* nmea_get_longitude(NMEA trame)
+{
+    char* str_longitude = malloc(sizeof(char)* (str_len(float_to_str(trame.longitude.coord)) + 2)); 
+    str_longitude[0] = float_to_str(trame.longitude.coord);
+    str_longitude[str_len(float_to_str(trame.longitude.coord))] = trame.longitude.direction;
+    str_longitude[str_len(float_to_str(trame.longitude.coord)) + 1] = '\0';
+    return str_longitude;
+}
+
+char* nmea_get_altitude(NMEA trame)
+{
+    char* str_altitude = malloc(sizeof(char)* (str_len(float_to_str(trame.altitude)) + 2)); 
+    str_altitude[0] = float_to_str(trame.altitude);
+    str_altitude[str_len(float_to_str(trame.altitude))] = 'M\0';
+    return str_altitude;
+}
+
+char* nmea_get_coord(NMEA trame, type_coord tc)
+{
+    if (tc == type_coord.LATITUDE)
+    {
+        return nmea_get_latitude(trame);
+    }
+    if (tc == type_coord.LONGITUDE)
+    {
+        return nmea_get_longitude(trame);
+    }
+    if (tc == type_coord.ALTITUDE)
+    {
+        return nmea_get_altitude(trame);
+    }
+
+}

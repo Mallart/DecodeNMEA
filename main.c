@@ -17,10 +17,8 @@ void main(int argc, char** argv)
 		exit(1);
 	}
 	NMEA trame = str_to_nmea(argc > 2 ? argv[1] : trame_string);
-	printf("\n%dh", trame.hour.hour);
-	printf("%dm", trame.hour.minute);
-	printf("%ds\n", trame.hour.second);
-	printf("\n%f %c", trame.latitude.coord, trame.latitude.direction);
-	printf("\n%f %c", trame.longitude.coord, trame.longitude.direction);
+	printf("%s/n" nmea_get_heure(trame));
+	printf("%s/n" nmea_get_coord(trame, LATITUDE));
+	printf("%s/n" nmea_get_heure(trame, LONGITUDE));
 }
 

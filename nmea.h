@@ -37,7 +37,12 @@ typedef struct
 	int checksum;
 } NMEA;
 
+enum type_coord {LATITUDE , LONGITUDE , ALTITUDE };
 
 short validate(char*);
 NMEA str_to_nmea(char*);
+char* nmea_get_heure(NMEA trame);
+char* nmea_get_latitude(NMEA trame);
+char* nmea_get_longitude(NMEA trame);
+char* nmea_get_altitude(NMEA trame);
 #endif
