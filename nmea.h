@@ -1,7 +1,5 @@
-#pragma once
-
+#ifndef NMEA_START
 #include "str.h"
-
 #define NMEA_START "$GPGGA"
 #define NMEA_MIN_N_FIELDS 15
 
@@ -42,3 +40,4 @@ typedef struct
 
 short validate(char*);
 NMEA str_to_nmea(char*);
+#endif
