@@ -45,6 +45,6 @@ char* nmea_get_heure(NMEA trame);
 char* nmea_get_latitude(NMEA trame);
 char* nmea_get_longitude(NMEA trame);
 char* nmea_get_altitude(NMEA trame);
-char* nmea_get_coord(NMEA trame, type_coord tc);
+char* nmea_get_coord(NMEA trame,  enum type_coord tc);
 
 #endif
