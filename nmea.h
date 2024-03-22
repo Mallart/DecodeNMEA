@@ -39,5 +39,5 @@ typedef struct
 
 
 short validate(char*);
-NMEA* str_to_nmea(char*);
+NMEA str_to_nmea(char*);
 #endif

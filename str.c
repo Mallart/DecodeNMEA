@@ -57,10 +57,15 @@ char** str_split(char* str, char delimiter)
 {
 	int index = 0;
 	int n_char = str_count_char(str, delimiter);
-	if (!n_char)
-		return str;
 	CHECK_PTR(str);
-	char** table = malloc(sizeof(char*) * n_char);
+	char** table;
+	if (!n_char)
+	{
+		table = malloc(sizeof(char*));
+		table[0] = str;
+		return table;
+	}
+	table = malloc(sizeof(char*) * n_char);
 	CHECK_PTR(table);
 	for (int i = 0; i < str_count_char(str, delimiter) + 1 && str[i]; ++i)
 	{

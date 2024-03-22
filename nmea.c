@@ -5,7 +5,7 @@ short validate(char* nmea)
     return str_compare(NMEA_START, nmea, 6);
 }
 
-NMEA* str_to_nmea(char* str)
+NMEA str_to_nmea(char* str)
 {
     NMEA nmea;
     hour nmea_hour;
@@ -29,5 +29,5 @@ NMEA* str_to_nmea(char* str)
     nmea.elapsed_seconds_since_last_update = CAST_STR_TO_INT(nmea_properties[11]);
     nmea.dgps_id = (unsigned)CAST_STR_TO_INT(nmea_properties[12]);
     nmea.checksum = CAST_STR_TO_INT(nmea_properties[13]);
-    return &nmea;
+    return nmea;
 }
