@@ -56,8 +56,11 @@ bool str_compare(char* str1, char* str2, int length)
 char** str_split(char* str, char delimiter)
 {
 	int index = 0;
+	int n_char = str_count_char(str, delimiter);
+	if (!n_char)
+		return str;
 	CHECK_PTR(str);
-	char** table = malloc(sizeof(char*) * str_count_char(str, delimiter));
+	char** table = malloc(sizeof(char*) * n_char);
 	CHECK_PTR(table);
 	for (int i = 0; i < str_count_char(str, delimiter) + 1 && str[i]; ++i)
 	{
@@ -72,7 +75,7 @@ int str_to_int(char* str, int len)
 	int offset = 0;
 	int sum = 0;
 	int i = len;
-	for (; i; --i)
+	for (; i > 0; --i)
 		if (str[i - 1 + offset] > 47 && str[i - 1 + offset] < 57)
 			sum += (str[i - 1 + offset] - 48) * power(10, len - i);
 		else
