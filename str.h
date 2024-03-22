@@ -38,6 +38,7 @@ char* str_trim(char* string);
 char* str_substring(char* string, int start, int length);
 
 char* int_to_str(int n);
+char* float_to_str(float n);
 
 int power(int a, int b);
 float inverse_power(float, float);

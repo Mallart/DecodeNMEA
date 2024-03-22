@@ -56,7 +56,7 @@ char* nmea_get_latitude(NMEA trame)
 
 char* nmea_get_longitude(NMEA trame)
 {
-    char* str_longitude = malloc(sizeof(char)* (str_len(float_to_str(trame.longitude.coord)) + 2)); 
+    char* str_longitude = malloc(sizeof(char)* (str_len(float_to_str(trame.longitude.coord)) + 2));
     str_longitude[0] = float_to_str(trame.longitude.coord);
     str_longitude[str_len(float_to_str(trame.longitude.coord))] = trame.longitude.direction;
     str_longitude[str_len(float_to_str(trame.longitude.coord)) + 1] = '\0';

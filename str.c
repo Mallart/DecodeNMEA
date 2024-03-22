@@ -110,6 +110,11 @@ char* int_to_str(int n)
 	return str;
 }
 
+char* float_to_str(float n)
+{
+	return 0;
+}
+
 
 float str_to_float(char* str, int len)
 {
