@@ -36,12 +36,12 @@ char* nmea_get_heure(NMEA trame)
 {
     char* str_heure = malloc(sizeof(char)* 10); 
     str_heure[0] = int_to_str(trame.hour.hour);
-    str_heure[2] = 'h'
+    str_heure[2] = 'h';
     str_heure[3] = int_to_str(trame.hour.minute);
-    str_heure[5] = 'm'
+    str_heure[5] = 'm';
     str_heure[6] = int_to_str(trame.hour.second);
-    str_heure[8] = 's'
-    str_heure[9] = '\0'
+    str_heure[8] = 's';
+    str_heure[9] = '\0';
     return str_heure;
 }
 
@@ -71,17 +71,17 @@ char* nmea_get_altitude(NMEA trame)
     return str_altitude;
 }
 
-char* nmea_get_coord(NMEA trame, type_coord tc)
+char* nmea_get_coord(NMEA trame, enum type_coord tc)
 {
-    if (tc == type_coord.LATITUDE)
+    if (tc & LATITUDE)
     {
         return nmea_get_latitude(trame);
     }
-    if (tc == type_coord.LONGITUDE)
+    if (tc & LONGITUDE)
     {
         return nmea_get_longitude(trame);
     }
-    if (tc == type_coord.ALTITUDE)
+    if (tc & ALTITUDE)
     {
         return nmea_get_altitude(trame);
     }

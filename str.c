@@ -62,6 +62,7 @@ char** str_split(char* str, char delimiter)
 	if (!n_char)
 	{
 		table = malloc(sizeof(char*));
+		CHECK_PTR(table);
 		table[0] = str;
 		return table;
 	}
@@ -89,6 +90,24 @@ int str_to_int(char* str, int len)
 			--i;
 		}
 	return sum;
+}
+
+char* int_to_str(int n)
+{
+	int initial = n;
+	char* str = malloc(sizeof(char) * (num_zeros(n) + 1));
+	CHECK_PTR(str);
+	int index = num_zeros(n);
+	while (index && n / index > 10)
+	{
+		int div = n / power(10, index);
+		str[num_zeros(initial) - index] = n / power(10, index) + 48;
+		n /= 10;
+		--index;
+	}
+	str[num_zeros(initial - index)] = n + 48;
+	str[num_zeros(initial) + 1] = '\0';
+	return str;
 }
 
 
@@ -159,4 +178,23 @@ int power(int a, int b)
 float inverse_power(float n, float p)
 {
 	return 1 / power(n, p);
+}
+
+int num_zeros(int n)
+{
+	int i = 0;
+	while (n > 10)
+	{
+		(float)n /= 10;
+		++i;
+	}
+	return i;
+}
+
+int euclidean_division(int a, int b)
+{
+	int r = a % b;
+	if (r < 0) 
+		r += abs(b);
+	return (a - r) / b;
 }

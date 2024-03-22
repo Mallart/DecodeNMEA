@@ -37,6 +37,8 @@ char* str_trim(char* string);
 // Cree une nouvelle chaîne basee sur celle donnee, mais commençant a un index donne et se terminant n caracteres apres.
 char* str_substring(char* string, int start, int length);
 
+char* int_to_str(int n);
+
 int power(int a, int b);
 float inverse_power(float, float);
 

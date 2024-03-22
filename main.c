@@ -4,6 +4,8 @@
 
 void main(int argc, char** argv)
 {
+	printf(int_to_str(48));
+
 	char trame_string[BUFFER_LENGTH + 1];
 	if (argc < 2)
 	{
