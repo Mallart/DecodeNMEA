@@ -36,9 +36,14 @@ float str_to_float(char* str, int length);
 char* str_trim(char* string);
 // Cree une nouvelle chaîne basee sur celle donnee, mais commençant a un index donne et se terminant n caracteres apres.
 char* str_substring(char* string, int start, int length);
-
-char* int_to_str(int n);
-char* float_to_str(float n);
+// Returns a new string being the concatenations of the two one's result
+char* str_concat(char* str1, char* str2);
+// Inserts a string inside another with the specified index
+char* str_insert(char* str, char* insert, int index);
+// Converts an int to a string
+char* int_to_str(long long n);
+// Converts a float to a string
+char* float_to_str(float n, int n_decimal_after_comma);
 
 int power(int a, int b);
 float inverse_power(float, float);

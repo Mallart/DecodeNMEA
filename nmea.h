@@ -2,6 +2,9 @@
 #include "str.h"
 #define NMEA_START "$GPGGA"
 #define NMEA_MIN_N_FIELDS 15
+#define NMEA_N_DECIMAL 5
+#define NMEA_EXAMPLE "$GPGGA,064036.289,4836.5375,N,00740.9373,E,1,04,3.2,200.2,M,,,,0000*0E"
+#define NMEA_INSERT_TIME(str_heure, time, temp, index) str_heure = str_insert(str_heure, trame.hour.##time < 10 ? str_concat("0", temp) : temp, index)
 
 typedef struct
 {

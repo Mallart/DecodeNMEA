@@ -92,27 +92,26 @@ int str_to_int(char* str, int len)
 	return sum;
 }
 
-char* int_to_str(int n)
+char* int_to_str(long long n)
 {
 	int initial = n;
-	char* str = malloc(sizeof(char) * (num_zeros(n) + 1));
+	int index = num_zeros(initial);
+	char* str = malloc(sizeof(char) * (index + 2));
 	CHECK_PTR(str);
-	int index = num_zeros(n);
 	while (index && n / index > 10)
 	{
-		int div = n / power(10, index);
-		str[num_zeros(initial) - index] = n / power(10, index) + 48;
+		str[index] = n % 10 + 48;
 		n /= 10;
 		--index;
 	}
-	str[num_zeros(initial - index)] = n + 48;
+	str[0] = n + 48;
 	str[num_zeros(initial) + 1] = '\0';
 	return str;
 }
 
-char* float_to_str(float n)
+char* float_to_str(float n, int n_decimals_after_comma)
 {
-	return 0;
+	return str_insert(int_to_str((long long)(n * power(10, n_decimals_after_comma))), ".", n_decimals_after_comma - 1);;
 }
 
 
@@ -170,6 +169,40 @@ char* str_substring(char* str, int start, int length)
 	return result;
 }
 
+char* str_concat(char* str1, char* str2)
+{
+	CHECK_PTR(str1);
+	CHECK_PTR(str2);
+	int offset = str_len(str1);
+	int max_bound = str_len(str2);
+	char* result = malloc(sizeof(char) * (offset + max_bound + 1));
+	CHECK_PTR(result);
+	for (int i = 0; i < offset; ++i)
+		result[i] = str1[i];
+	for (int i = offset; i < offset + max_bound; ++i)
+		result[i] = str2[i - offset];
+	result[offset + max_bound] = '\0';
+	return result;
+}
+
+char* str_insert(char* str, char* insert, int index)
+{
+	CHECK_PTR(str);
+	CHECK_PTR(insert);
+	int len = str_len(str);
+	int insert_len = str_len(insert);
+	char* result = malloc(sizeof(char) * (len + insert_len + 1));
+	CHECK_PTR(result);
+	for (int i = len; i >= index; --i)
+		result[i + insert_len] = str[i];
+	for (int i = index; i < index + insert_len; ++i)
+		result[i] = insert[i - index];
+	for (int i = 0; i < index; ++i)
+		result[i] = str[i];
+	result[len + insert_len] = '\0';
+	return result;
+}
+
 int power(int a, int b)
 {
 	int n = a;
@@ -185,21 +218,13 @@ float inverse_power(float n, float p)
 	return 1 / power(n, p);
 }
 
-int num_zeros(int n)
+int num_zeros(long long n)
 {
 	int i = 0;
 	while (n > 10)
 	{
-		(float)n /= 10;
+		(long float)n /= 10;
 		++i;
 	}
 	return i;
-}
-
-int euclidean_division(int a, int b)
-{
-	int r = a % b;
-	if (r < 0) 
-		r += abs(b);
-	return (a - r) / b;
 }
