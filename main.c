@@ -1,6 +1,6 @@
-#include "nmea.h"
 #include <stdio.h>
-#define BUFFER_LENGTH 2048
+#include "nmea.h"
+#include "file_io.h"
 
 /******************************************************************************
 *  ASR => 4R2.04                                                              *
@@ -54,6 +54,8 @@ void main(int argc, char** argv)
 		exit(1);
 	}
 	NMEA trame = str_to_nmea(argc > 2 ? argv[1] : trame_string);
+	log_nmea("log_nmea.txt", &trame);
+	trame = *read_nmea("log_nmea.txt");
 	printf("Heure de la trame: %s\n", nmea_get_heure(trame));
 	printf("Latitude de la trame: %s\n", nmea_get_coord(trame, LATITUDE));
 	printf("Longitude de le trame: %s\n", nmea_get_coord(trame, LONGITUDE));

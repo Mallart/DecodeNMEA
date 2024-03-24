@@ -1,5 +1,6 @@
 #ifndef NMEA_START
 #include "str.h"
+#define BUFFER_LENGTH 2048
 #define NMEA_START "$GPGGA"
 #define NMEA_MIN_N_FIELDS 15
 #define NMEA_N_DECIMAL 5
