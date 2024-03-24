@@ -108,7 +108,7 @@ int str_to_int(char* str, int len)
 	int sum = 0;
 	int i = len;
 	for (; i > 0; --i)
-		if (str[i - 1 + offset] > 47 && str[i - 1 + offset] < 57)
+		if (str[i - 1 + offset] > 47 && str[i - 1 + offset] < 58)
 			sum += (str[i - 1 + offset] - 48) * power(10, len - i);
 		else
 		{
