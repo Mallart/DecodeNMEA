@@ -1,5 +1,31 @@
 #include "str.h"
 
+/******************************************************************************
+*  ASR => 4R2.04                                                              *
+*******************************************************************************
+*                                                                             *
+*  N° de Sujet : 01                                                           *
+*                                                                             *
+*******************************************************************************
+*                                                                             *
+*  Intitulé : Analyse de trame GPS                                            *
+*                                                                             *
+*******************************************************************************
+*                                                                             *
+*  Nom-prénom1 : Allart Mathéo                                                *
+*                                                                             *
+*  Nom-prénom2 : Vallette Noé                                                 *
+*                                                                             *
+*  Nom-prénom3 :                                                              *
+*                                                                             *
+*  Nom-prénom4 :                                                              *
+*                                                                             *
+*******************************************************************************
+*                                                                             *
+*  Nom du fichier : str.c                                                     *
+*                                                                             *
+******************************************************************************/
+
 int ptr_array_len(void** _array)
 {
 	CHECK_PTR(_array);
@@ -109,9 +135,9 @@ char* int_to_str(long long n)
 	return str;
 }
 
-char* float_to_str(float n, int n_decimals_after_comma)
+char* float_to_str(float n)
 {
-	return str_insert(int_to_str((long long)(n * power(10, n_decimals_after_comma))), ".", n_decimals_after_comma - 1);;
+	return str_insert(int_to_str((long long)(n * power(10, f_num_zeros(n) + 1))), ".", f_num_zeros(n) + 1);
 }
 
 
@@ -221,9 +247,21 @@ float inverse_power(float n, float p)
 int num_zeros(long long n)
 {
 	int i = 0;
+	int f = (float)n;
+	while (f > 10)
+	{
+		f /= 10;
+		++i;
+	}
+	return i;
+}
+
+int f_num_zeros(float n)
+{
+	int i = 0;
 	while (n > 10)
 	{
-		(long float)n /= 10;
+		n /= 10;
 		++i;
 	}
 	return i;

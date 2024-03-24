@@ -1,6 +1,31 @@
-// This file is under MIT License and is written by Matheo Allart:
+// This file is under MIT License and is written by Matheo Allart. Its source is:
 // https://github.com/Mallart/string2
 
+/******************************************************************************
+*  ASR => 4R2.04                                                              *
+*******************************************************************************
+*                                                                             *
+*  N° de Sujet : 01                                                           *
+*                                                                             *
+*******************************************************************************
+*                                                                             *
+*  Intitulé : Analyse de trame GPS                                            *
+*                                                                             *
+*******************************************************************************
+*                                                                             *
+*  Nom-prénom1 : Allart Mathéo                                                *
+*                                                                             *
+*  Nom-prénom2 : Vallette Noé                                                 *
+*                                                                             *
+*  Nom-prénom3 :                                                              *
+*                                                                             *
+*  Nom-prénom4 :                                                              *
+*                                                                             *
+*******************************************************************************
+*                                                                             *
+*  Nom du fichier : str.h                                                     *
+*                                                                             *
+******************************************************************************/
 
 // multi-includes prevention
 #ifndef STR2
@@ -36,15 +61,17 @@ float str_to_float(char* str, int length);
 char* str_trim(char* string);
 // Cree une nouvelle chaîne basee sur celle donnee, mais commençant a un index donne et se terminant n caracteres apres.
 char* str_substring(char* string, int start, int length);
-// Returns a new string being the concatenations of the two one's result
+// Retourne une nouvelle chaine de caracteres basee sur l'initiale, mais commencant a un index donne et finissant a index + longueur.
 char* str_concat(char* str1, char* str2);
-// Inserts a string inside another with the specified index
+// Insere une nouvelle chaine de caracteres dans celle donnee a l'index fourni 
 char* str_insert(char* str, char* insert, int index);
-// Converts an int to a string
+// Convtit un int vers une string
 char* int_to_str(long long n);
-// Converts a float to a string
-char* float_to_str(float n, int n_decimal_after_comma);
+// Convertit un float vers une string
+char* float_to_str(float n);
 
+int num_zeros(long long n);
+int f_num_zeros(float n);
 int power(int a, int b);
 float inverse_power(float, float);
 

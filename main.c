@@ -2,6 +2,34 @@
 #include <stdio.h>
 #define BUFFER_LENGTH 2048
 
+/******************************************************************************
+*  ASR => 4R2.04                                                              *
+*******************************************************************************
+*                                                                             *
+*  N° de Sujet : 01                                                           *
+*                                                                             *
+*******************************************************************************
+*                                                                             *
+*  Intitulé : Analyse de trame GPS                                            *
+*                                                                             *
+*******************************************************************************
+*                                                                             *
+*  Nom-prénom1 : Allart Mathéo                                                *
+*                                                                             *
+*  Nom-prénom2 : Vallette Noé                                                 *
+*                                                                             *
+*  Nom-prénom3 :                                                              *
+*                                                                             *
+*  Nom-prénom4 :                                                              *
+*                                                                             *
+*******************************************************************************
+*                                                                             *
+*  Nom du fichier : main.c                                                    *
+*                                                                             *
+******************************************************************************/
+
+
+
 // Dans ce programme, il est possible de saisir une trame NMEA a analyser durant l'execution du programme, ou alors
 // dans la console apres le nom du programme.
 
