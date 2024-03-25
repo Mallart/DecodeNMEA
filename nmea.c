@@ -122,6 +122,28 @@ char* nmea_get_altitude(NMEA trame)
 	return str_altitude;
 }
 
+char* nmea_to_str(NMEA* nmea)
+{
+	return str_poly_concat(32,
+		"$GPGGA", NMEA_RECORD_DELIMITER,
+		nmea_get_raw_heure(*nmea), NMEA_RECORD_DELIMITER,
+		float_to_str(nmea->latitude.coord), NMEA_RECORD_DELIMITER,
+		char_to_str(nmea->latitude.direction), NMEA_RECORD_DELIMITER,
+		float_to_str(nmea->longitude.coord), NMEA_RECORD_DELIMITER,
+		char_to_str(nmea->longitude.direction), NMEA_RECORD_DELIMITER,
+		int_to_str(nmea->fix_qualification), NMEA_RECORD_DELIMITER,
+		int_to_str(nmea->n_satellites_following), NMEA_RECORD_DELIMITER,
+		float_to_str(nmea->dop), NMEA_RECORD_DELIMITER,
+		float_to_str(nmea->altitude), NMEA_RECORD_DELIMITER,
+		"M", NMEA_RECORD_DELIMITER,
+		float_to_str(nmea->correction), NMEA_RECORD_DELIMITER,
+		"M", NMEA_RECORD_DELIMITER,
+		int_to_str(nmea->elapsed_seconds_since_last_update), NMEA_RECORD_DELIMITER,
+		int_to_str(nmea->dgps_id), NMEA_RECORD_DELIMITER,
+		int_to_str(nmea->checksum), "\n"
+	);
+}
+
 char* nmea_get_coord(NMEA trame, enum type_coord tc)
 {
 	if (tc == LATITUDE)

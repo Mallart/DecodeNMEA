@@ -1,5 +1,7 @@
 #ifndef NMEA_START
 #include "str.h"
+#include "estr.h"
+#define NMEA_RECORD_DELIMITER ","
 #define BUFFER_LENGTH 2048
 #define NMEA_START "$GPGGA"
 #define NMEA_MIN_N_FIELDS 15
@@ -85,5 +87,6 @@ char* nmea_get_longitude(NMEA trame);
 char* nmea_get_altitude(NMEA trame);
 // Retourne la coordonnee choisie d'une trame NMEA
 char* nmea_get_coord(NMEA trame, enum type_coord tc);
-
+// Retourne une trame NMEA formatee en tant que string
+char* nmea_to_str(NMEA* nmea);
 #endif

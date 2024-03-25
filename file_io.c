@@ -32,24 +32,7 @@ void log_nmea(char* file_path, NMEA* nmea)
 	fopen_s(&f, file_path, "w+");
 	if (!f)
 		return;
-	char* nmea_to_string = str_poly_concat(32,
-		"$GPGGA",												NMEA_RECORD_DELIMITER,
-		nmea_get_raw_heure(*nmea),								NMEA_RECORD_DELIMITER,
-		float_to_str(nmea->latitude.coord),						NMEA_RECORD_DELIMITER,
-		char_to_str(nmea->latitude.direction),					NMEA_RECORD_DELIMITER,
-		float_to_str(nmea->longitude.coord),					NMEA_RECORD_DELIMITER,
-		char_to_str(nmea->longitude.direction),					NMEA_RECORD_DELIMITER,
-		int_to_str(nmea->fix_qualification),					NMEA_RECORD_DELIMITER,
-		int_to_str(nmea->n_satellites_following),				NMEA_RECORD_DELIMITER,
-		float_to_str(nmea->dop),								NMEA_RECORD_DELIMITER,
-		float_to_str(nmea->altitude),							NMEA_RECORD_DELIMITER,
-		"M",													NMEA_RECORD_DELIMITER,
-		float_to_str(nmea->correction),							NMEA_RECORD_DELIMITER,
-		"M",													NMEA_RECORD_DELIMITER,
-		int_to_str(nmea->elapsed_seconds_since_last_update),	NMEA_RECORD_DELIMITER,
-		int_to_str(nmea->dgps_id),								NMEA_RECORD_DELIMITER,
-		int_to_str(nmea->checksum), "\n"
-	);
+	char* nmea_to_string = nmea_to_str(nmea);
 	fwrite(nmea_to_string, sizeof(char), str_len(nmea_to_string), f);
 	fclose(f);
 }
@@ -63,7 +46,7 @@ NMEA* read_nmea(char* file_path)
 		NMEA* trame = parse_nmea(f);
 		return trame;
 	}
-	return;
+	return 0;
 }
 
 NMEA* parse_nmea(FILE* stream)
