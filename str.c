@@ -130,7 +130,7 @@ char* int_to_str(long long n)
 		n /= 10;
 		--index;
 	}
-	str[0] = n + 48;
+	str[0] = n %10 + 48 ;
 	str[num_zeros(initial) + 1] = '\0';
 	return str;
 }
@@ -138,6 +138,15 @@ char* int_to_str(long long n)
 char* float_to_str(float n)
 {
 	return str_insert(int_to_str((long long)(n * power(10, f_num_zeros(n) + 1))), ".", f_num_zeros(n) + 1);
+}
+
+char* char_to_str(char c)
+{
+	char* str = malloc(sizeof(char) * 2);
+	CHECK_PTR(str);
+	str[0] = c;
+	str[1] = '\0';
+	return str;
 }
 
 

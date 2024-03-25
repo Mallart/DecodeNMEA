@@ -69,6 +69,8 @@ char* str_insert(char* str, char* insert, int index);
 char* int_to_str(long long n);
 // Convertit un float vers une string
 char* float_to_str(float n);
+// Convertit un caractere vers une string
+char* char_to_str(char c);
 
 int num_zeros(long long n);
 int f_num_zeros(float n);
