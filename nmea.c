@@ -51,10 +51,12 @@ NMEA str_to_nmea(char* str)
 	nmea.n_satellites_following = CAST_STR_TO_INT(nmea_properties[7]);
 	nmea.dop = CAST_STR_TO_FLOAT(nmea_properties[8]);
 	nmea.altitude = CAST_STR_TO_FLOAT(nmea_properties[9]);
-	nmea.correction = CAST_STR_TO_FLOAT(nmea_properties[10]);
-	nmea.elapsed_seconds_since_last_update = CAST_STR_TO_INT(nmea_properties[11]);
-	nmea.dgps_id = (unsigned)CAST_STR_TO_INT(nmea_properties[12]);
-	nmea.checksum = CAST_STR_TO_INT(nmea_properties[13]);
+	// nmea_properties[10] is char and altitude's unit
+	nmea.correction = CAST_STR_TO_FLOAT(nmea_properties[11]);
+	// nmea_properties[12] is char and correction's unit
+	nmea.elapsed_seconds_since_last_update = CAST_STR_TO_INT(nmea_properties[12]);
+	nmea.dgps_id = (unsigned)CAST_STR_TO_INT(nmea_properties[13]);
+	nmea.checksum = CAST_STR_TO_INT(nmea_properties[14]);
 	return nmea;
 }
 
@@ -72,6 +74,17 @@ char* nmea_get_heure(NMEA trame)
 	str_heure[8] = 's';
 	str_heure[9] = '\0';
 	return str_trim(str_heure);
+}
+
+char* nmea_get_raw_heure(NMEA trame)
+{
+	char* str_heure = malloc(sizeof(char) * 6);
+	CHECK_PTR(str_heure);
+	NMEA_INSERT_TIME(str_heure, hour, int_to_str(trame.hour.hour % 24), 0);
+	NMEA_INSERT_TIME(str_heure, minute, int_to_str(trame.hour.minute % 60), 2);
+	NMEA_INSERT_TIME(str_heure, second, int_to_str(trame.hour.second % 60), 4);
+	str_heure[6] = '\0';
+	return str_heure;
 }
 
 char* nmea_get_latitude(NMEA trame)
