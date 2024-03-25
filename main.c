@@ -54,6 +54,7 @@ void main(int argc, char** argv)
 			exit(1);
 		}
 		trame = str_to_nmea(argc > 2 ? argv[1] : trame_string);
+		log_nmea(record_path, &trame);
 	}
 	else
 	{
@@ -91,6 +92,9 @@ void main(int argc, char** argv)
 		printf("\nLa trame n'est pas valide: %s", trame_string);
 		exit(1);
 	}
+
+	// Affichage des donnees 
+
 	printf("Lecture des donnees enregistrees a \"%s\": \n", record_path);
 	printf("Heure de la trame: %s\n", nmea_get_heure(trame));
 	printf("Latitude de la trame: %s\n", nmea_get_coord(trame, LATITUDE));
