@@ -1,1 +1,1 @@
-@gcc -ggdb -Werror -o main main.c nmea.h nmea.c str.h str.c
+@gcc -ggdb -Werror -o main main.c nmea.h nmea.c file_io.c file_io.h estr.c estr.h str.h str.c

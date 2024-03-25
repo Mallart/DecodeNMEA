@@ -51,10 +51,11 @@ NMEA* read_nmea(char* file_path)
 
 NMEA* parse_nmea(FILE* stream)
 {
-	CHECK_PTR(stream);
+	CHECK_NV_PTR(stream);
 	char str[BUFFER_LENGTH];
 	fgets(str, BUFFER_LENGTH, stream);
-	CHECK_PTR(str);
+	CHECK_NV_PTR(str);
 	NMEA trame = str_to_nmea(str);
-	return &trame;
+	NMEA* trame_ptr = &trame;
+	return trame_ptr;
 }

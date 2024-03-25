@@ -28,7 +28,7 @@
 
 int ptr_array_len(void** _array)
 {
-	CHECK_PTR(_array);
+	CHECK_NV_PTR(_array);
 	int i = 0;
 	for (; _array[i]; ++i);
 	return i - 2;
@@ -36,7 +36,7 @@ int ptr_array_len(void** _array)
 
 int str_count_char(char* str, char c)
 {
-	CHECK_PTR(str);
+	CHECK_NV_PTR(str);
 	int occurences = 0;
 	int length = str_len(str);
 	for (int i = 0; i < length; ++i)
@@ -46,7 +46,7 @@ int str_count_char(char* str, char c)
 
 short str_len(char* str)
 {
-	CHECK_PTR(str);
+	CHECK_NV_PTR(str);
 	int i = 0;
 	for (; str[i]; ++i);
 	return i;
@@ -55,7 +55,7 @@ short str_len(char* str)
 char* str_copy(char* str, int len)
 {
 	char* output = malloc(sizeof(char*) * (len + 1));
-	CHECK_PTR(output);
+	CHECK_NV_PTR(output);
 	for (int i = 0; i < len; ++i)
 		output[i] = str[i];
 	output[len] = '\0';
@@ -72,8 +72,8 @@ int str_indexof(char* str, char c)
 
 bool str_compare(char* str1, char* str2, int length)
 {
-	CHECK_PTR(str1);
-	CHECK_PTR(str2);
+	CHECK_NV_PTR(str1);
+	CHECK_NV_PTR(str2);
 	int i = 0;
 	for (; i < length && str1[i] == str2[i]; ++i);
 	return i == length;
@@ -83,17 +83,17 @@ char** str_split(char* str, char delimiter)
 {
 	int index = 0;
 	int n_char = str_count_char(str, delimiter);
-	CHECK_PTR(str);
+	CHECK_NV_PTR(str);
 	char** table;
 	if (!n_char)
 	{
 		table = malloc(sizeof(char*));
-		CHECK_PTR(table);
+		CHECK_NV_PTR(table);
 		table[0] = str;
 		return table;
 	}
 	table = malloc(sizeof(char*) * n_char);
-	CHECK_PTR(table);
+	CHECK_NV_PTR(table);
 	for (int i = 0; i < str_count_char(str, delimiter) + 1 && str[i]; ++i)
 	{
 		table[i] = str_copy(str + index, str_indexof(str + index, delimiter));
@@ -123,7 +123,7 @@ char* int_to_str(long long n)
 	int initial = n;
 	int index = num_zeros(initial);
 	char* str = malloc(sizeof(char) * (index + 2));
-	CHECK_PTR(str);
+	CHECK_NV_PTR(str);
 	while (index && n / index > 10)
 	{
 		str[index] = n % 10 + 48;
@@ -143,7 +143,7 @@ char* float_to_str(float n)
 char* char_to_str(char c)
 {
 	char* str = malloc(sizeof(char) * 2);
-	CHECK_PTR(str);
+	CHECK_NV_PTR(str);
 	str[0] = c;
 	str[1] = '\0';
 	return str;
@@ -174,8 +174,8 @@ char* str_trim(char* str)
 		- str_count_char(str, '\t')
 		- str_count_char(str, '\n'))
 	);
-	CHECK_PTR(str);
-	CHECK_PTR(result);
+	CHECK_NV_PTR(str);
+	CHECK_NV_PTR(result);
 	for (int i = 0; i < len; ++i)
 	{
 		switch (str[i])
@@ -195,9 +195,9 @@ char* str_trim(char* str)
 
 char* str_substring(char* str, int start, int length)
 {
-	CHECK_PTR(str);
+	CHECK_NV_PTR(str);
 	char* result = malloc(sizeof(char) * (length + 1));
-	CHECK_PTR(result);
+	CHECK_NV_PTR(result);
 	for (int i = 0; str[i] && i < length; ++i)
 		result[i] = str[i + start];
 	result[length] = '\0';
@@ -206,12 +206,12 @@ char* str_substring(char* str, int start, int length)
 
 char* str_concat(char* str1, char* str2)
 {
-	CHECK_PTR(str1);
-	CHECK_PTR(str2);
+	CHECK_NV_PTR(str1);
+	CHECK_NV_PTR(str2);
 	int offset = str_len(str1);
 	int max_bound = str_len(str2);
 	char* result = malloc(sizeof(char) * (offset + max_bound + 1));
-	CHECK_PTR(result);
+	CHECK_NV_PTR(result);
 	for (int i = 0; i < offset; ++i)
 		result[i] = str1[i];
 	for (int i = offset; i < offset + max_bound; ++i)
@@ -222,12 +222,12 @@ char* str_concat(char* str1, char* str2)
 
 char* str_insert(char* str, char* insert, int index)
 {
-	CHECK_PTR(str);
-	CHECK_PTR(insert);
+	CHECK_NV_PTR(str);
+	CHECK_NV_PTR(insert);
 	int len = str_len(str);
 	int insert_len = str_len(insert);
 	char* result = malloc(sizeof(char) * (len + insert_len + 1));
-	CHECK_PTR(result);
+	CHECK_NV_PTR(result);
 	for (int i = len; i >= index; --i)
 		result[i + insert_len] = str[i];
 	for (int i = index; i < index + insert_len; ++i)

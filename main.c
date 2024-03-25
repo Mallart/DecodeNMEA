@@ -35,11 +35,11 @@
 // Dans ce programme, il est possible de saisir une trame NMEA a analyser durant l'execution du programme, ou alors
 // dans la console apres le nom du programme.
 
-void main(int argc, char** argv)
+int main(int argc, char** argv)
 {
 	char* record_path = "";
 	char* trame_string = malloc(sizeof(char) * BUFFER_LENGTH + 1);
-	CHECK_PTR(trame_string);
+	CHECK_NV_PTR(trame_string);
 	NMEA trame;
 	if (argc < 2)
 	{
@@ -79,7 +79,7 @@ void main(int argc, char** argv)
 			log_nmea(record_path, &trame);
 			printf("Trame sauvegardee a l'emplacement: \"%s\".\n", record_path);
 			NMEA* trame_ptr = read_nmea(record_path);
-			CHECK_PTR(trame_ptr);
+			CHECK_NV_PTR(trame_ptr);
 			if (!trame_ptr)
 			{
 				printf("Erreur lors de la lecture du fichier \"%s\"", record_path);
@@ -108,5 +108,6 @@ void main(int argc, char** argv)
 	printf("Secondes de delai: %d\n", trame.elapsed_seconds_since_last_update);
 	printf("ID de la station: %d\n", trame.dgps_id);
 	printf("Checksum: %d\n", trame.checksum);
+	return 0;
 }
 

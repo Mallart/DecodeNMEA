@@ -1,4 +1,5 @@
-#pragma once
+#ifndef NMEA_ESTR
+#define NMEA_ESTR
 
 // ETENDU STR
 #include <stdarg.h>
@@ -32,3 +33,4 @@
 
 // Concatene et renvoie plusieurs chaines de caracteres
 char* str_poly_concat(int n_args, ...);
+#endif

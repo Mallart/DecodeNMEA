@@ -34,7 +34,9 @@
 #include <stdlib.h>
 
 #define bool unsigned short
-#define CHECK_PTR(ptr) if(!ptr) return 0
+#define CHECK_PTR(ptr) if(!ptr) return
+// Non void
+#define CHECK_NV_PTR(ptr) if(!ptr) return 0
 #define CAST_STR_TO_INT(str) str_to_int(str, str_len(str))
 #define CAST_STR_TO_FLOAT(str) str_to_float(str, str_len(str))
 

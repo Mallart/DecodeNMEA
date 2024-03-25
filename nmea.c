@@ -63,14 +63,14 @@ NMEA str_to_nmea(char* str)
 char* nmea_get_heure(NMEA trame)
 {
 	char* temp = "  ";
-	CHECK_PTR(temp);
+	CHECK_NV_PTR(temp);
 	char* str_heure = malloc(sizeof(char) * 10);
-	CHECK_PTR(str_heure);
-	NMEA_INSERT_TIME(str_heure, hour, int_to_str(trame.hour.hour % 24), 0);
+	CHECK_NV_PTR(str_heure);
+	NMEA_INSERT_TIME(str_heure, trame.hour.hour, int_to_str(trame.hour.hour % 24), 0);
 	str_heure[2] = 'h';
-	NMEA_INSERT_TIME(str_heure, minute, int_to_str(trame.hour.minute % 60), 3);
+	NMEA_INSERT_TIME(str_heure, trame.hour.minute, int_to_str(trame.hour.minute % 60), 3);
 	str_heure[5] = 'm';
-	NMEA_INSERT_TIME(str_heure, second, int_to_str(trame.hour.second % 60), 6);
+	NMEA_INSERT_TIME(str_heure, trame.hour.second, int_to_str(trame.hour.second % 60), 6);
 	str_heure[8] = 's';
 	str_heure[9] = '\0';
 	return str_trim(str_heure);
@@ -79,10 +79,10 @@ char* nmea_get_heure(NMEA trame)
 char* nmea_get_raw_heure(NMEA trame)
 {
 	char* str_heure = malloc(sizeof(char) * 6);
-	CHECK_PTR(str_heure);
-	NMEA_INSERT_TIME(str_heure, hour, int_to_str(trame.hour.hour % 24), 0);
-	NMEA_INSERT_TIME(str_heure, minute, int_to_str(trame.hour.minute % 60), 2);
-	NMEA_INSERT_TIME(str_heure, second, int_to_str(trame.hour.second % 60), 4);
+	CHECK_NV_PTR(str_heure);
+	NMEA_INSERT_TIME(str_heure, trame.hour.hour, int_to_str(trame.hour.hour % 24), 0);
+	NMEA_INSERT_TIME(str_heure, trame.hour.minute, int_to_str(trame.hour.minute % 60), 2);
+	NMEA_INSERT_TIME(str_heure, trame.hour.second, int_to_str(trame.hour.second % 60), 4);
 	str_heure[6] = '\0';
 	return str_heure;
 }
@@ -92,7 +92,7 @@ char* nmea_get_latitude(NMEA trame)
 	char* temp_str = float_to_str(trame.latitude.coord);
 	int latitude_length = str_len(temp_str);
 	char* str_latitude = malloc(sizeof(char) * (latitude_length + 2));
-	CHECK_PTR(str_latitude);
+	CHECK_NV_PTR(str_latitude);
 	str_latitude = str_insert(str_latitude, temp_str, 0);
 	str_latitude[latitude_length] = trame.latitude.direction;
 	str_latitude[latitude_length + 1] = '\0';
@@ -104,7 +104,7 @@ char* nmea_get_longitude(NMEA trame)
 	char* temp_str = float_to_str(trame.longitude.coord);
 	int longitude_length = str_len(temp_str);
 	char* str_longitude = malloc(sizeof(char) * (longitude_length + 2));
-	CHECK_PTR(str_longitude);
+	CHECK_NV_PTR(str_longitude);
 	str_longitude = str_insert(str_longitude, temp_str, 0);
 	str_longitude[longitude_length] = trame.longitude.direction;
 	str_longitude[longitude_length + 1] = '\0';
@@ -116,7 +116,7 @@ char* nmea_get_altitude(NMEA trame)
 	char* temp_str = float_to_str(trame.altitude);
 	int altitude_length = str_len(temp_str);
 	char* str_altitude = malloc(sizeof(char) * (altitude_length + 2));
-	CHECK_PTR(str_altitude);
+	CHECK_NV_PTR(str_altitude);
 	str_altitude = str_insert(str_altitude, temp_str, 0);
 	str_altitude[altitude_length] = '\0';
 	return str_altitude;

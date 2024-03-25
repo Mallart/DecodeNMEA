@@ -1,4 +1,8 @@
-#pragma once
+// multi includes prevention
+#ifndef NMEA_FILE_IO
+#define NMEA_FILE_IO
+
+
 #include <stdio.h>
 #include "nmea.h"
 /******************************************************************************
@@ -33,3 +37,5 @@ void log_nmea(char* file_path, NMEA* nmea);
 NMEA* read_nmea(char* file_path);
 // Serialise le contenu d'un flux vers une trame NMEA.
 NMEA* parse_nmea(FILE* stream);
+
+#endif
