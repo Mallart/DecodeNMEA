@@ -59,7 +59,6 @@ void main(int argc, char** argv)
 	else
 	{
 		record_path = argc > 2 ? argv[2] : DEFAULT_RECORD_PATH;
-		trame_string = nmea_to_str(&trame);
 		// Lecture seulement
 		if (str_compare(argv[1], "0", 1))
 		{
@@ -70,11 +69,13 @@ void main(int argc, char** argv)
 				exit(-1);
 			}
 			trame = *read_nmea(record_path);
+			trame_string = nmea_to_str(&trame);
 		}
 		// Ecriture puis lecture
 		else
 		{
 			trame_string = str_insert(trame_string, argv[1], 0);
+			trame = str_to_nmea(trame_string);
 			log_nmea(record_path, &trame);
 			printf("Trame sauvegardee a l'emplacement: \"%s\".\n", record_path);
 			NMEA* trame_ptr = read_nmea(record_path);
