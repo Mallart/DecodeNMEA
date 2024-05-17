@@ -38,33 +38,23 @@ int str_count_char(char* str, char c)
 {
 	CHECK_NV_PTR(str);
 	int occurences = 0;
-	int length = str_len(str);
+	int length = strlen(str);
 	for (int i = 0; i < length; ++i)
 		occurences = str[i] == c ? ++occurences : occurences;
 	return occurences;
-}
-
-short str_len(char* str)
-{
-	CHECK_NV_PTR(str);
-	int i = 0;
-	for (; str[i]; ++i);
-	return i;
 }
 
 char* str_copy(char* str, int len)
 {
 	char* output = malloc(sizeof(char*) * (len + 1));
 	CHECK_NV_PTR(output);
-	for (int i = 0; i < len; ++i)
-		output[i] = str[i];
-	output[len] = '\0';
+	memcpy(output, str, len);
 	return output;
 }
 
 int str_indexof(char* str, char c)
 {
-	int len = str_len(str);
+	int len = strlen(str);
 	int i = 0;
 	for (; i < len && str[i] != c; ++i);
 	return i;
@@ -104,6 +94,7 @@ char** str_split(char* str, char delimiter)
 
 int str_to_int(char* str, int len)
 {
+	return atoi(str);
 	int offset = 0;
 	int sum = 0;
 	int i = len;
@@ -152,21 +143,12 @@ char* char_to_str(char c)
 
 float str_to_float(char* str, int len)
 {
-	int offset = 0;
-	float sum = 0;
-	int dot = str_indexof(str, '.');
-	sum += str_to_int(str, dot);
-	for (int i = dot + 1; str[i] && i + offset < len; ++i)
-		if (str[i] > 47 && str[i] < 57)
-			sum += (float)(str[i] - 48) / power(10, i + offset - dot);
-		else
-			--offset;
-	return sum;
+	return strtof(str, (char**)(unsigned long long)len);
 }
 
 char* str_trim(char* str)
 {
-	int len = str_len(str);
+	int len = strlen(str);
 	int index = 0;
 	char* result = malloc(sizeof(char) * (
 		len
@@ -206,26 +188,22 @@ char* str_substring(char* str, int start, int length)
 
 char* str_concat(char* str1, char* str2)
 {
+	char* str = malloc(sizeof(char) * (strlen(str1) + strlen(str2)));
 	CHECK_NV_PTR(str1);
 	CHECK_NV_PTR(str2);
-	int offset = str_len(str1);
-	int max_bound = str_len(str2);
-	char* result = malloc(sizeof(char) * (offset + max_bound + 1));
-	CHECK_NV_PTR(result);
-	for (int i = 0; i < offset; ++i)
-		result[i] = str1[i];
-	for (int i = offset; i < offset + max_bound; ++i)
-		result[i] = str2[i - offset];
-	result[offset + max_bound] = '\0';
-	return result;
+	CHECK_NV_PTR(str);
+	memcpy(str, str1, strlen(str1));
+	memcpy(str + strlen(str1), str2, strlen(str2));
+	memcpy(str + strlen(str1) + strlen(str2), "\0", 1);
+	return str;
 }
 
 char* str_insert(char* str, char* insert, int index)
 {
 	CHECK_NV_PTR(str);
 	CHECK_NV_PTR(insert);
-	int len = str_len(str);
-	int insert_len = str_len(insert);
+	int len = strlen(str);
+	int insert_len = strlen(insert);
 	char* result = malloc(sizeof(char) * (len + insert_len + 1));
 	CHECK_NV_PTR(result);
 	for (int i = len; i >= index; --i)

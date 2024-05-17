@@ -28,19 +28,17 @@
 
 void log_nmea(char* file_path, NMEA* nmea)
 {
-	FILE* f;
-	fopen_s(&f, file_path, "w+");
+	FILE* f = fopen(file_path, "w+");
 	if (!f)
 		return;
 	char* nmea_to_string = nmea_to_str(nmea);
-	fwrite(nmea_to_string, sizeof(char), str_len(nmea_to_string), f);
+	fwrite(nmea_to_string, sizeof(char), strlen(nmea_to_string), f);
 	fclose(f);
 }
 
 NMEA* read_nmea(char* file_path)
 {
-	FILE* f;
-	fopen_s(&f, file_path, "r");
+	FILE* f = fopen(file_path, "r");
 	if (f)
 	{
 		NMEA* trame = parse_nmea(f);

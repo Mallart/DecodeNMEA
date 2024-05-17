@@ -1,6 +1,4 @@
-// This file is under MIT License and is written by Matheo Allart. Its source is:
-// https://github.com/Mallart/string2
-
+#pragma warning(disable:4996)
 /******************************************************************************
 *  ASR => 4R2.04                                                              *
 *******************************************************************************
@@ -32,20 +30,19 @@
 #define STR2
 
 #include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
 
 #define bool unsigned short
 #define CHECK_PTR(ptr) if(!ptr) return
 // Non void
 #define CHECK_NV_PTR(ptr) if(!ptr) return 0
-#define CAST_STR_TO_INT(str) str_to_int(str, str_len(str))
-#define CAST_STR_TO_FLOAT(str) str_to_float(str, str_len(str))
-
+#define CAST_STR_TO_INT(str) atoi(str)
+#define CAST_STR_TO_FLOAT(str) atof(str);
 // Renvoie le nombre d'elements dans un tableau de pointeurs.
 int ptr_array_len(void** _array);
 // Compte les occurrences de caracteres dans une chaîne de caracteres.
 int str_count_char(char* str, char c);
-// Renvoie le nombre de caracteres dans une chaîne de caracteres terminee par un caractere nul.
-short str_len(char* string);
 // Renvoie une nouvelle chaîne identique a celle fournie.
 char* str_copy(char* string, int length_to_copy);
 // Renvoie la position du caractere donne dans la chaîne, ou la longueur de la chaîne si ce caractere n'est pas present.

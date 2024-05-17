@@ -55,6 +55,7 @@ int main(int argc, char** argv)
 		}
 		trame = str_to_nmea(argc > 2 ? argv[1] : trame_string);
 		log_nmea(record_path, &trame);
+		trame = *read_nmea(record_path);
 	}
 	else
 	{
