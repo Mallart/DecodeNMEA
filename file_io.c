@@ -28,11 +28,13 @@
 
 void log_nmea(char* file_path, NMEA* nmea)
 {
-	FILE* f = fopen(file_path, "w+");
+	FILE* f = fopen(file_path, "w");
 	if (!f)
 		return;
 	char* nmea_to_string = nmea_to_str(nmea);
-	fwrite(nmea_to_string, sizeof(char), strlen(nmea_to_string), f);
+	fputs(nmea_to_string, f);
+	fputs("; Informations sur la trame: \n", f);
+	fputs(generate_comments(*nmea), f);
 	fclose(f);
 }
 

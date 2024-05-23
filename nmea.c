@@ -36,6 +36,8 @@ NMEA str_to_nmea(char* str)
 	NMEA nmea;
 	hour nmea_hour;
 	coordinates* temp_coordinates = malloc(sizeof(coordinates));
+	// ne prend pas en compte les commentaires
+	str = str_substring(str, 0, find_char(str, ';'));
 	char** nmea_properties = str_split(str, ',');
 	nmea_hour.hour = CAST_STR_TO_INT(str_copy(nmea_properties[1], 2));
 	nmea_hour.minute = CAST_STR_TO_INT(str_copy(nmea_properties[1] + 2, 2));
@@ -159,4 +161,55 @@ char* nmea_get_coord(NMEA trame, enum type_coord tc)
 		return nmea_get_altitude(trame);
 	}
 
+}
+
+char* generate_comments(NMEA trame)
+{
+	size_t index = 0;
+	char* comments = malloc(sizeof(char) * 512);
+	APPEND_INCR_STR(index, comments, "Heure de la trame: ");
+	APPEND_INCR_STR(index, comments, nmea_get_heure(trame));
+	STR_INCR_RETURN(index, comments);
+
+	APPEND_INCR_STR(index, comments, "Latitude de la trame: ");
+	APPEND_INCR_STR(index, comments, nmea_get_coord(trame, LATITUDE));
+	STR_INCR_RETURN(index, comments);
+	
+	APPEND_INCR_STR(index, comments, "Longitude de la trame: ");
+	APPEND_INCR_STR(index, comments, nmea_get_coord(trame, LONGITUDE));
+	STR_INCR_RETURN(index, comments);
+
+	APPEND_INCR_STR(index, comments, "Altitude: ");
+	APPEND_INCR_STR(index, comments, float_to_str(trame.altitude));
+	STR_INCR_RETURN(index, comments);
+	
+	APPEND_INCR_STR(index, comments, "Nombre de satellites a portee lors de l'enregistrement de la trame:");
+	APPEND_INCR_STR(index, comments, int_to_str(trame.n_satellites_following));
+	STR_INCR_RETURN(index, comments);
+	
+	APPEND_INCR_STR(index, comments, "Note de la qualite des donnees : ");
+	APPEND_INCR_STR(index, comments, int_to_str(trame.fix_qualification));
+	STR_INCR_RETURN(index, comments);
+	
+	APPEND_INCR_STR(index, comments, "Dilution de la precision: ");
+	APPEND_INCR_STR(index, comments, float_to_str(trame.dop));
+	STR_INCR_RETURN(index, comments);
+	
+	APPEND_INCR_STR(index, comments, "Taux de correction: ");
+	APPEND_INCR_STR(index, comments, float_to_str(trame.correction));
+	STR_INCR_RETURN(index, comments);
+	
+	APPEND_INCR_STR(index, comments, "Secondes de delai: ");
+	APPEND_INCR_STR(index, comments, int_to_str(trame.elapsed_seconds_since_last_update));
+	STR_INCR_RETURN(index, comments);
+	
+	APPEND_INCR_STR(index, comments, "ID de la station: ");
+	APPEND_INCR_STR(index, comments, int_to_str(trame.dgps_id));
+	STR_INCR_RETURN(index, comments);
+
+	APPEND_INCR_STR(index, comments, "Checksum: ");
+	APPEND_INCR_STR(index, comments, int_to_str(trame.checksum));
+	STR_INCR_RETURN(index, comments);
+	comments[index] = '\0';
+	return comments;
 }

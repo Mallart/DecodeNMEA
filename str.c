@@ -140,6 +140,13 @@ char* char_to_str(char c)
 	return str;
 }
 
+size_t find_char(char* str, char c)
+{
+	size_t i = 0;
+	for (; i < strlen(str) && str[i] != c; ++i);
+	return i;
+}
+
 
 float str_to_float(char* str, int len)
 {

@@ -9,6 +9,7 @@
 #define NMEA_EXAMPLE "$GPGGA,064036.289,4836.5375,N,00740.9373,E,1,04,3.2,200.2,M,,,,0000*0E"
 #define NMEA_INSERT_TIME(str_heure, time, temp, index) str_heure = str_insert(str_heure, (time < 10 ? str_concat("0", temp) : temp), index)
 
+
 /******************************************************************************
 *  ASR => 4R2.04                                                              *
 *******************************************************************************
@@ -73,7 +74,8 @@ enum type_coord {LATITUDE , LONGITUDE , ALTITUDE };
 
 // Valide ou non une trame NMEA selon son format de données.
 short validate(char*);
-// Convertit une trame NMEA en une chaine de caracteres censee la representer
+// Convertit une trame NMEA en une chaine de caracteres censee la representer.
+// Traite les commentaires de la trame (a partir du caractere ';') comme tels et ne les convertit pas.
 NMEA str_to_nmea(char*);
 // Retourne l'heure formatee d'une trame NMEA
 char* nmea_get_heure(NMEA trame);
@@ -89,4 +91,6 @@ char* nmea_get_altitude(NMEA trame);
 char* nmea_get_coord(NMEA trame, enum type_coord tc);
 // Retourne une trame NMEA formatee en tant que string
 char* nmea_to_str(NMEA* nmea);
+// Genere des commentaires relatifs a la trame NMEA afin de la rendre humainement plus lisible
+char* generate_comments(NMEA trame);
 #endif

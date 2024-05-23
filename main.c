@@ -35,6 +35,10 @@
 // Dans ce programme, il est possible de saisir une trame NMEA a analyser durant l'execution du programme, ou alors
 // dans la console apres le nom du programme.
 
+// Si le programme est execute depuis une console externe, il est possible de specifier zero, un, ou deux arguments:
+// arg[0] : nom du programme
+// arg[1] : trame NMEA
+// arg[2] : chemin vers le fichier ou les donnees seront enregistrees
 int main(int argc, char** argv)
 {
 	char* record_path = "";
@@ -96,19 +100,8 @@ int main(int argc, char** argv)
 	}
 
 	// Affichage des donnees 
-
 	printf("Lecture des donnees enregistrees a \"%s\": \n", record_path);
-	printf("Heure de la trame: %s\n", nmea_get_heure(trame));
-	printf("Latitude de la trame: %s\n", nmea_get_coord(trame, LATITUDE));
-	printf("Longitude de le trame: %s\n", nmea_get_coord(trame, LONGITUDE));
-	printf("Altitude: %fM\n", trame.altitude);
-	printf("Nombre de satellites a portee lors de l'enregistrement de la trame: %d\n", trame.n_satellites_following);
-	printf("Note de la qualite des donnees: %d\n", trame.fix_qualification);
-	printf("Dilution de la precision: %f\n", trame.dop);
-	printf("Taux de correction: %f\n", trame.correction);
-	printf("Secondes de delai: %d\n", trame.elapsed_seconds_since_last_update);
-	printf("ID de la station: %d\n", trame.dgps_id);
-	printf("Checksum: %d\n", trame.checksum);
+	printf("Commentaires sur la trame NMEA: %s\n", generate_comments(trame));
 	return 0;
 }
 
