@@ -52,7 +52,7 @@ Mkfile.old
 dkms.conf
 
 # Compilation
-x64/
+*x64/*
 
 # Visual Studio cache and executables
 *.tlog
