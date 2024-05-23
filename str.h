@@ -28,15 +28,15 @@
 // multi-includes prevention
 #ifndef STR2
 #define STR2
-#define APPEND_STR(_dest, _src) memcpy(_dest, _src, strlen(_src) * sizeof(char))
-#define APPEND_INCR_STR(_index, _dest, _src) { memcpy(_dest + _index, _src, strlen(_src) * sizeof(char)); _index += strlen(_src); }
-#define STR_INCR_RETURN(_index, _dest) { memcpy(_dest + index, "\n", 1); _index++; }
 
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 
 #define bool unsigned short
+#define APPEND_STR(_dest, _src) memcpy(_dest, _src, strlen(_src) * sizeof(char))
+#define APPEND_INCR_STR(_index, _dest, _src) { memcpy(_dest + _index, _src, strlen(_src) * sizeof(char)); _index += strlen(_src); }
+#define STR_INCR_RETURN(_index, _dest) { memcpy(_dest + index, "\n", 1); _index++; }
 #define CHECK_PTR(ptr) if(!ptr) return
 // Non void
 #define CHECK_NV_PTR(ptr) if(!ptr) return 0
@@ -67,13 +67,13 @@ char* str_substring(char* string, int start, int length);
 char* str_concat(char* str1, char* str2);
 // Insere une nouvelle chaine de caracteres dans celle donnee a l'index fourni 
 char* str_insert(char* str, char* insert, int index);
-// Convtit un int vers une string
+// Convertit un int vers une string
 char* int_to_str(long long n);
 // Convertit un float vers une string
 char* float_to_str(float n);
 // Convertit un caractere vers une string
 char* char_to_str(char c);
-
+// Trouve un caractere et retourne sa position
 size_t find_char(char* str, char c);
 
 int num_zeros(long long n);
