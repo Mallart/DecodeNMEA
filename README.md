@@ -12,6 +12,9 @@ DecodeNMEA will next save the frame in a file, or read the provided "Record file
 ## Can I use your code ?
 Of course, just mention the project's contributors where you use it.
 
+> [!NOTE]
+> This project is entierly commented in French, as our school asked us to. However, all functions and variables are written in english and should be clear enough not to need any comment added to them.
+
 # Decode NMEA - FR
 ## Qu'est-ce que c'est ?
 Ce projet était destiné à être un projet scolaire.
@@ -24,3 +27,6 @@ DecodeNMEA.exe accepte de zéro à deux arguments et peuvent être les suivants:
 DecodeNMEA ira ensuite sauvegarder ladite trame dans un fichier, ou lire le "Chemin du fichier d'enregistrement" et en lire les données pour les afficher dans la console si la "Trame NMEA" donnée par l'utilisateur est "0".
 ## Puis-je utiliser votre code ?
 Bien sûr, mentionnez juste le nom et le lien du dépôt originel et des contributeurs à celui-ci.
+
+> [!NOTE]
+> Le code du projet est commenté en anglais suite à des recommandations scolaires. Cependant, l'intégralité des variables et fonctions sont en anglais et censées être lisibles et compréhensible sans nul besoin d'explicitations supplémentaires.
