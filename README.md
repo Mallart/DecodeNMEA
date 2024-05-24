@@ -1,3 +1,5 @@
+Dépôt git: https://github.com/Mallart/DecodeNMEA/
+
 # Decode NMEA - EN
 ## What is it ?
 This project was intended to be a school project.
@@ -9,6 +11,12 @@ DecodeNMEA.exe takes from zero to two additional arguments, and can be the follo
 `decodenmea [NMEA frame / 0] [Record file path]`
 
 DecodeNMEA will next save the frame in a file, or read the provided "Record file path" and display its data in the console if the provided frame is "0".
+> [!WARNING]
+> Using the makefile on Linux or Cygwin will lead to an executable named "nmea". So instead of typing "decodenmea [...]", you'll have to type "./nmea [...]" to run it.
+
+> [!TIP]
+> Use "make clean" to automatically remove all object files and saved frames on Linux or Cygwin.
+
 ## Can I use your code ?
 Of course, just mention the project's contributors where you use it.
 
@@ -25,6 +33,13 @@ DecodeNMEA.exe accepte de zéro à deux arguments et peuvent être les suivants:
 `decodenmea [Trame NMEA / 0] [Chemin du fichier d'enregistrement]`
 
 DecodeNMEA ira ensuite sauvegarder ladite trame dans un fichier, ou lire le "Chemin du fichier d'enregistrement" et en lire les données pour les afficher dans la console si la "Trame NMEA" donnée par l'utilisateur est "0".
+
+> [!WARNING]
+> Utilisez le makefile sous Linux ou Cygwin entraînera la création d'un exécutable appelé "nmea". Par conséquent, au lieu de taper "decodenmea [...]", vous devrez taper "./nmea [...]" pour l'exécuter.
+
+> [!TIP]
+> Utilisez "make clean" pour nettoyer le dossier de tous les objets de compilation et des trames sauvegardées sous Linux ou Cygwin.
+
 ## Puis-je utiliser votre code ?
 Bien sûr, mentionnez juste le nom et le lien du dépôt originel et des contributeurs à celui-ci.
 
