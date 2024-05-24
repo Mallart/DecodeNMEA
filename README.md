@@ -1,4 +1,5 @@
 Dépôt git: https://github.com/Mallart/DecodeNMEA/
+Dépôt gitlab: https://gitlab.info.iut-tlse3.fr/llm5249a/DecodeNMEA
 
 # Decode NMEA - EN
 ## What is it ?
